@@ -12,7 +12,7 @@
 <body>
   <div id="request">
     <h1><i>THE weather today</i></h1>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" action="/">
       <input type="text" name="country" id="country" placeholder="City"/>
       <input type="text" name="code" id="code" placeholder="Code"/>
       <input type="submit" id="submitBtn" value="Send"/>
@@ -29,6 +29,22 @@
     <p>{{wind}}</p>
     <p>{{time}}</p>
   </div>
-  
+
+  <br>
+
+  {% if cities != [] %}
+  <div id="other">
+    <h1>Surrounding Cities:</h1>
+    {% for city in cities %}
+    <p><i>{{city.name}}</i></p>
+    <p>Description: {{city.desc}}</p>
+    <p>Temperature: {{city.temp}} Celsius, but feels like {{city.tempFeel}} Celsius</p>
+    <p>Pressure of {{city.pressure}} kPa, with a humidity of {{city.humidity}}%</p>
+    <p>Wind speeds of {{city.wind}} km/h</p>
+    <br>
+    {% endfor %}
+  </div>
+  {% endif %}
+
 </body>
 </html>
