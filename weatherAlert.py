@@ -9,19 +9,24 @@ apikey = " INSERT API KEY "
 @app.route('/', methods=['GET', 'POST'])
 def index():
   title = desc = temp = pressure = wind = time = ""
-  if request.method == 'POST':
+  if request.method == 'POST': # recieve user input
     print('data recieved')
-    form = request.form
+    form = request.form # store user input from form
+    
+    # get values from dict keys
     country = form.get('country')
     code = form.get('code')
 
+    # call api for country
     params = dict(q=f"{country}, {code}", appid= apikey)
     api = req.get(url="http://api.openweathermap.org/data/2.5/weather", params=params)
 
+    # convert to json
     data = api.json()
     if data:
       print(data)
       
+      # simplicity dict
       weather = dict(desc = data["weather"][0]["description"],
                      temp = ((data["main"]["temp"] - 273.15)*100)//100, 
                      tempFeel = ((data["main"]["feels_like"] - 273.15)*100)//100, 
@@ -32,9 +37,12 @@ def index():
                      sunrise = datetime.utcfromtimestamp(data["sys"]["sunrise"]).strftime('%Y-%m-%d %H:%M:%S'),
                      sunset = datetime.utcfromtimestamp(data["sys"]["sunset"]).strftime('%Y-%m-%d %H:%M:%S'))
       print(weather)
+      
+      # remove date
       sunrise = weather["sunrise"][11:]
       sunset = weather["sunset"][11:]
 
+      # prep html text 
       title = f"{country}, {code}:"
       desc = f"Description: {weather['desc']} with a visibility of {weather['vis']} km"
       temp = f"Temperature: {weather['temp']} Celsius, but feels like {weather['tempFeel']} Celsius"
