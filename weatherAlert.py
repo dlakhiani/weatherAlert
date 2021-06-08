@@ -3,7 +3,7 @@ from datetime import datetime
 import requests as req
 
 app = Flask(__name__)
-apikey = "21e0b1d1654e633828cb873e5ca4d9be"
+apikey = " INSERT API KEY "
 
 # route to home page
 @app.route('/', methods=['GET', 'POST'])
