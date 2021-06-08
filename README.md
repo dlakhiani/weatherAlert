@@ -1,4 +1,8 @@
-# weatherAlert
-Displays the current weather in any country!
+# weatherAlert using Python, Flask + Jinja2, OpenWeatherMap
 
-Uses the OpenWeatherMap API to fetch data in JSON, displayed on the website through Flask + Jinja2
+## Guide
+```
+git clone [repo]
+pip3 install flask
+pip3 install requests
+```
